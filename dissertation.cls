@@ -346,7 +346,9 @@
   % Force 1.5 spacing for front matter sections
   \onehalfspacing
   % Heading
-  \centerline{\fontsize{16}{16}\bf\uppercase{#1}}
+  \centerline{\fontsize{16}{16}\bf \uppercase{#1}}
+  % Add some space after the title.
+  \vspace{2ex}
   % Insert the text.
   \sloppy #2 %
 }
@@ -502,7 +504,7 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf TABLE OF CONTENTS} %
  % Add some space after the title.
@@ -526,7 +528,7 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf LIST OF FIGURES} %
  % Add some space after the title.
@@ -551,7 +553,7 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf LIST OF TABLES} %
  % Add some space after the title.
@@ -583,7 +585,7 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf LIST OF PROGRAMS} %
  % Add some space after the title.
@@ -611,7 +613,7 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf LIST OF APPENDICES} %
  % Add some space after the title.
@@ -646,11 +648,9 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf LIST OF ACRONYMS} %
- % Add some space after the title.
-%  \vspace{1ex} %
  % Start the automatic abbreviations feature.
  \begin{singlespace} %
   \begin{acronym} %
@@ -682,7 +682,7 @@
  % Use front page styling.
  \frntpg %
  % Larger upper margin for first page of table
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Add the title
  \centerline{\fontsize{16}{16}\bf LIST OF SYMBOLS} %
  % Add some space after the title.
@@ -733,7 +733,7 @@
  % Add this page to the table of contents.
  \phantomsection\addcontentsline{toc}{frontchapter}{Abstract} %
  % Extra vertical space
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Center the title area.
  \begin{center} %
   % Formatting
@@ -806,8 +806,6 @@
 \def\@section@appendix#1{
   % Begin the phantom section to accommodate hyperref package
   \phantomsection
-  % Add a bookmark manually.
-  % \pdfbookmark[1]{#1}{#1} % remove this line to avoid duplicate bookmarks
   % Save the section number
   \sectionmark{#1}
   % Issue the start section command
@@ -860,7 +858,7 @@
 % Change the formatting of the first page of each chapter.
 \renewcommand{\@makechapterhead}[1]{%
  % Insert an extra top margin.
- \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ \vspace*{1in}
  % Insert the text
  { %
   % Ensure proper alignment.
