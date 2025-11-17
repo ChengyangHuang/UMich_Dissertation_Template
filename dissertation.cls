@@ -735,12 +735,9 @@
  % Extra vertical space
  \vspace*{1in}
  % Center the title area.
- \begin{center} %
-  % Formatting
-  \fontsize{16}{16} \bfseries
-  % Add the heading.
-  ABSTRACT \\[2ex] %
- \end{center} %
+ \centerline{\fontsize{16}{16}\bf ABSTRACT} %
+ % Add some space after the title.
+ \vspace{2ex} %
  % Insert the abstract text.
  \onehalfspacing %
  % Insert the text.
@@ -823,7 +820,7 @@
 \let\@tex@bibliography\bibliography
 
 % Change the bibliography header.
-\renewcommand*{\bibname}{\centerline{\normalfont\fontsize{16}{16}\bfseries BIBLIOGRAPHY}}
+\renewcommand*{\bibname}{\vspace{0.35em}\centerline{\normalfont\fontsize{16}{16}\bfseries BIBLIOGRAPHY}\vspace{-0.35em}}
 
 % Create a new command for the bibliography.
 \renewcommand*{\bibliography}[1]{
