@@ -25,6 +25,7 @@
 \newif\if@umich@listoffigures
 \newif\if@umich@listoftables
 \newif\if@umich@listofprograms
+\newif\if@umich@listofalgorithms
 \newif\if@umich@listofappendices
 \newif\if@umich@listofacronyms
 \newif\if@umich@listofsymbols
@@ -72,6 +73,9 @@
 % This is useful for complex figures.
 \RequirePackage{subcaption}
 
+% This is useful for algorithms.
+\RequirePackage[linesnumbered,ruled,algochapter]{algorithm2e}
+
 % Compress multiple citations
 \RequirePackage{natbib}
 
@@ -107,6 +111,12 @@
 
 % This package allows for appendices after the \appendix command
 \RequirePackage[titletoc]{appendix}
+
+% This package allows for adjusting section title formats
+\RequirePackage{titlesec}
+
+% This package allows for any font size
+\RequirePackage{lmodern}
 
 %% ---- FORMATTING -----------------------------------------------------
 % Set the page style to fancy.
@@ -340,7 +350,7 @@
   % Force 1.5 spacing for front matter sections
   \onehalfspacing
   % Heading
-  \begin{center}\textbf{\large\uppercase{#1}}\end{center} %
+  \centerline{\fontsize{16}{16}\bf\uppercase{#1}}
   % Insert the text.
   \sloppy #2 %
 }
@@ -422,6 +432,7 @@
 \newcommand{\showlistoffigures}{\@umich@listoffigurestrue}
 \newcommand{\showlistoftables}{\@umich@listoftablestrue}
 \newcommand{\showlistofprograms}{\@umich@listofprogramstrue}
+\newcommand{\showlistofalgorithms}{\@umich@listofalgorithmstrue}
 \newcommand{\showlistofappendices}{\@umich@listofappendicestrue}
 \newcommand{\showlistofacronyms}{\@umich@listofacronymstrue}
 \newcommand{\showlistofsymbols}{\@umich@listofsymbolstrue}
@@ -430,6 +441,7 @@
 \newcommand{\hidelistoffigures}{\@umich@listoffiguresfalse}
 \newcommand{\hidelistoftables}{\@umich@listoftablesfalse}
 \newcommand{\hidelistofprograms}{\@umich@listofprogramsfalse}
+\newcommand{\hidelistofalgorithms}{\@umich@listofalgorithmsfalse}
 \newcommand{\hidelistofappendices}{\@umich@listofappendicesfalse}
 \newcommand{\hidelistofacronyms}{\@umich@listofacronymsfalse}
 \newcommand{\hidelistofsymbols}{\@umich@listofsymbolsfalse}
@@ -498,7 +510,7 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf TABLE OF CONTENTS} %
+ \centerline{\fontsize{16}{16}\bf TABLE OF CONTENTS} %
  % Add some space after the title.
  \vspace{2ex} %
  % Start the automatic table of contents features.
@@ -522,7 +534,7 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf LIST OF FIGURES} %
+ \centerline{\fontsize{16}{16}\bf LIST OF FIGURES} %
  % Add some space after the title.
  \vspace{1ex} %
  % Start the automatic table of contents features.
@@ -547,7 +559,7 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf LIST OF TABLES} %
+ \centerline{\fontsize{16}{16}\bf LIST OF TABLES} %
  % Add some space after the title.
  \vspace{1ex} %
  % Start the automatic table of contents features.
@@ -579,7 +591,7 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf LIST OF PROGRAMS} %
+ \centerline{\fontsize{16}{16}\bf LIST OF PROGRAMS} %
  % Add some space after the title.
  \vspace{1ex} %
  % Start the automatic table of contents features.
@@ -587,6 +599,31 @@
   \@starttoc{lop}\if@restonecol\twocolumn\fi %
  \end{singlespace} %
  \addtocontents{lop}{\hbox{PROGRAM}}
+}
+
+%% ---- LIST OF ALGORITHMS -------------------------------------------------
+% This sets the format for the algorithm entries.
+\newcommand*{\l@algorithm}{\@dottedtocline{1}{0em}{2.5em}}
+
+% This sets the formatting of the list of algorithms page.
+\renewcommand*{\listofalgorithms}{%
+ % Move to new page.
+ \newpage %
+ % Add this page to the table of contents.
+ \phantomsection\addcontentsline{toc}{frontchapter}{List of Algorithms} %
+ % Use front page styling.
+ \frntpg %
+ % Larger upper margin for first page of table
+ \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
+ % Add the title
+ \centerline{\fontsize{16}{16}\bf LIST OF ALGORITHMS} %
+ % Add some space after the title.
+ \vspace{1ex} %
+ % Start the automatic table of contents features.
+ \begin{singlespace} %
+  \@starttoc{loa}\if@restonecol\twocolumn\fi %
+ \end{singlespace} %
+ \addtocontents{loa}{\hbox{ALGORITHM}}
 }
 
 %% ---- LIST OF APPENDICES ---------------------------------------------
@@ -607,13 +644,14 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf LIST OF APPENDICES} %
+ \centerline{\fontsize{16}{16}\bf LIST OF APPENDICES} %
  % Add some space after the title.
  \vspace{1ex} %
  % Start the automatic table of contents features.
  \begin{singlespace} %
   \@starttoc{loapp}\if@restonecol\twocolumn\fi %
  \end{singlespace} %
+ \addtocontents{loapp}{\hbox{APPENDIX}}
 }
 
 %% ---- LIST OF ACRONYMS -----------------------------------------------
@@ -641,9 +679,9 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf LIST OF ACRONYMS} %
+ \centerline{\fontsize{16}{16}\bf LIST OF ACRONYMS} %
  % Add some space after the title.
- \vspace{1ex} %
+%  \vspace{1ex} %
  % Start the automatic abbreviations feature.
  \begin{singlespace} %
   \begin{acronym} %
@@ -677,7 +715,7 @@
  % Larger upper margin for first page of table
  \begin{minipage}{0.8\textwidth} \vspace{1in} \end{minipage} \\ %
  % Add the title
- \centerline{\large\bf LIST OF SYMBOLS} %
+ \centerline{\fontsize{16}{16}\bf LIST OF SYMBOLS} %
  % Add some space after the title.
  \vspace{1ex} %
  % Start the automatic symbols feature.
@@ -730,7 +768,7 @@
  % Center the title area.
  \begin{center} %
   % Formatting
-  \large \bfseries
+  \fontsize{16}{16} \bfseries
   % Add the heading.
   ABSTRACT \\[2ex] %
  \end{center} %
@@ -787,6 +825,7 @@
  \addtocontents{lof}{\protect\addvspace{8pt}} %
  \addtocontents{lot}{\protect\addvspace{8pt}} %
  \addtocontents{lop}{\protect\addvspace{8pt}} %
+ \addtocontents{loa}{\protect\addvspace{8pt}} %
  % Produce the appropriate headings for the first page.
  \if@twocolumn %
   \@topnewpage[\@makechapterhead{#2}] %
@@ -800,7 +839,7 @@
   % Begin the phantom section to accommodate hyperref package
   \phantomsection
   % Add a bookmark manually.
-  \pdfbookmark[1]{#1}{#1} %
+  % \pdfbookmark[1]{#1}{#1} % remove this line to avoid duplicate bookmarks
   % Save the section number
   \sectionmark{#1}
   % Issue the start section command
@@ -809,7 +848,7 @@
     {0pt} %
     {-3.5ex plus -1ex minus -0.2ex} %
     {2.3ex plus 0.2ex} %
-    {\normalfont\Large\bfseries}
+    {\normalfont\fontsize{16}{16}\bfseries}
     {#1} % Add the section title text
   }
 
@@ -818,7 +857,7 @@
 \let\@tex@bibliography\bibliography
 
 % Change the bibliography header.
-\renewcommand*{\bibname}{\centerline{\large BIBLIOGRAPHY}}
+\renewcommand*{\bibname}{\centerline{\normalfont\fontsize{16}{16}\bfseries BIBLIOGRAPHY}}
 
 % Create a new command for the bibliography.
 \renewcommand*{\bibliography}[1]{
@@ -861,14 +900,33 @@
   % Check for chapter overflow.
   \ifnum \c@secnumdepth >\m@ne %
    % CHAPTER and number
-   \centerline{\Large\bf \@chapapp{} \thechapter} \par %
+   \centerline{\fontsize{16}{16}\bf \@chapapp{} \thechapter} \par %
    % Vertical space
    \vskip 0.3in \fi %
    % Insert the title of the chapter.
-   \begin{center} \LARGE\bf #1 \end{center} %
+   \begin{center} \fontsize{16}{16}\bf #1 \end{center} %
    % Vertical space after the title
    \nobreak \vskip 0.3in %
  } %
+}
+
+%% ---- SECTION HEADINGS -----------------------------------------------
+% \titleformat{\section}{\vskip 0.5em\fontsize{17.28}{17.28}\bfseries}{\thesection}{1em}{} % default size for report class with base font size 12pt
+% \titleformat{\subsection}{\vskip 0.36em\fontsize{14.4}{14.4}\bfseries}{\thesubsection}{1em}{} % default size for report class with base font size 12pt
+% \titleformat{\subsubsection}{\vskip 0.32em\fontsize{12}{12}\bfseries}{\thesubsubsection}{1em}{} % default size for report class with base font size 12pt
+\titleformat{\section}{\vskip 0.5em\fontsize{16}{16}\bfseries}{\thesection}{1em}{}
+
+%% ---- PARAGRAPH HEADINGS ---------------------------------------------
+% add period after paragraph titles
+% https://tex.stackexchange.com/questions/328355/add-a-period-after-each-paragraph-title
+\NewCommandCopy\latexparagraph\paragraph
+\RenewDocumentCommand{\paragraph}{sO{#3}m}{%
+  \IfBooleanTF{#1}
+    {\latexparagraph*{\maybe@addperiod{#3}}}
+    {\latexparagraph[#2]{\maybe@addperiod{#3}}}%
+}
+\newcommand{\maybe@addperiod}[1]{%
+  #1\@addpunct{.}%
 }
 
 %% ---- SPACING --------------------------------------------------------
@@ -877,7 +935,7 @@
 
 %% ---- LINKS ----------------------------------------------------------
 % This loads a package that allows extra colors for links.
-\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage[dvipsnames]{xcolor}
 
 % This will make labels and references hyperlinks.
 \RequirePackage{hyperref, href-ul}
@@ -901,7 +959,7 @@
  % Insert a title page.
  \titlepage %
  % Change the PDF title.
- \hypersetup{pdftitle=\inserttitle} %
+ \hypersetup{pdftitle=\inserttitle,pdfauthor=\insertauthor} %
  % Insert the frontispiece if there is one.
  \if@umich@frontispiece\frontispiecepage\fi %
  % Insert the copyright page if there is one.
@@ -924,6 +982,8 @@
  \if@umich@listoffigures\listoffigures\fi %
  % Insert the list of tables.
  \if@umich@listoftables\listoftables\fi %
+ % Insert the list of algorithms.
+ \if@umich@listofalgorithms\listofalgorithms\fi %
  % Insert the list of programs.
  \if@umich@listofprograms\listofprograms\fi %
  % Insert the list of appendices.
